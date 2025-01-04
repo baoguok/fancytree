@@ -7,7 +7,7 @@
  *
  * @requires ext-table
  *
- * Copyright (c) 2008-2021, Martin Wendt (https://wwWendt.de)
+ * Copyright (c) 2008-2023, Martin Wendt (https://wwWendt.de)
  *
  * Released under the MIT license
  * https://github.com/mar10/fancytree/wiki/LicenseInfo
@@ -240,10 +240,10 @@
 			$input = $td.find(":input:enabled,a");
 			this.debug("Focus input", $input);
 			if ($input.length) {
-				$input.focus();
+				$input.trigger("focus");
 				setActiveDescendant(this, $input);
 			} else {
-				$td.attr("tabindex", "-1").focus();
+				$td.attr("tabindex", "-1").trigger("focus");
 				setActiveDescendant(this, $td);
 			}
 		} else {
@@ -610,7 +610,7 @@
 				case "esc":
 					if ($activeTd && !tree.forceNavMode) {
 						// Switch from cell-edit-mode to cell-nav-mode
-						// $target.closest( "td" ).focus();
+						// $target.closest( "td" ).trigger("focus");
 						tree.forceNavMode = true;
 						tree.debug("Enter cell-nav-mode");
 						tree.$container.toggleClass(

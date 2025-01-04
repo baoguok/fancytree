@@ -4,7 +4,7 @@
  * Make node titles editable.
  * (Extension module for jquery.fancytree.js: https://github.com/mar10/fancytree/)
  *
- * Copyright (c) 2008-2021, Martin Wendt (https://wwWendt.de)
+ * Copyright (c) 2008-2023, Martin Wendt (https://wwWendt.de)
  *
  * Released under the MIT license
  * https://github.com/mar10/fancytree/wiki/LicenseInfo
@@ -111,7 +111,7 @@
 
 		// Focus <input> and bind keyboard handler
 		$input
-			.focus()
+			.trigger("focus")
 			.change(function (event) {
 				$input.addClass("fancytree-edit-dirty");
 			})

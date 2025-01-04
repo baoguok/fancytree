@@ -6,7 +6,7 @@
  *
  * @see http://api.jqueryui.com/menu/
  *
- * Copyright (c) 2008-2021, Martin Wendt (https://wwWendt.de)
+ * Copyright (c) 2008-2023, Martin Wendt (https://wwWendt.de)
  *
  * Released under the MIT license
  * https://github.com/mar10/fancytree/wiki/LicenseInfo
@@ -152,7 +152,7 @@
 					of: ctx.originalEvent,
 					collision: "fit",
 				})
-				.focus();
+				.trigger("focus");
 
 			opts.menu.open.call(tree, ctx.originalEvent, data);
 		},

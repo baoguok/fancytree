@@ -4,13 +4,13 @@
  * Render tree as table (aka 'tree grid', 'table tree').
  * (Extension module for jquery.fancytree.js: https://github.com/mar10/fancytree/)
  *
- * Copyright (c) 2008-2021, Martin Wendt (https://wwWendt.de)
+ * Copyright (c) 2008-2023, Martin Wendt (https://wwWendt.de)
  *
  * Released under the MIT license
  * https://github.com/mar10/fancytree/wiki/LicenseInfo
  *
- * @version 2.38.2
- * @date 2022-06-30T18:24:06Z
+ * @version 2.38.4
+ * @date 2024-12-27T23:25:02Z
  */
 
 (function (factory) {
@@ -70,7 +70,7 @@
 			// use the lowest descendant of the preceeding sibling
 			i = $.inArray(node, siblings);
 			prev = siblings[i - 1];
-			_assert(prev.tr);
+			_assert(prev.tr, "prev.tr missing: " + prev);
 			// descend to lowest child (with a <tr> tag)
 			while (prev.children && prev.children.length) {
 				last = prev.children[prev.children.length - 1];
@@ -88,7 +88,7 @@
 
 	$.ui.fancytree.registerExtension({
 		name: "table",
-		version: "2.38.2",
+		version: "2.38.4",
 		// Default options for this extension.
 		options: {
 			checkboxColumnIdx: null, // render the checkboxes into the this column index (default: nodeColumnIdx)
@@ -303,7 +303,8 @@
 					} else {
 						_assert(
 							!prevNode.parent,
-							"prev. row must have a tr, or be system root"
+							"prev. row must have a tr, or be system root: " +
+								prevNode
 						);
 						// tree.tbody.appendChild(newRow);
 						insertFirstChild(tree.tbody, newRow); // #675
@@ -535,7 +536,7 @@
 		/*,
 	treeSetFocus: function(ctx, flag) {
 //	        alert("treeSetFocus" + ctx.tree.$container);
-		ctx.tree.$container.focus();
+		ctx.tree.$container.trigger("focus");
 		$.ui.fancytree.focusTree = ctx.tree;
 	}*/
 	});

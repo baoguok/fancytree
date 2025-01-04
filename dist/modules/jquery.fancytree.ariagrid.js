@@ -7,13 +7,13 @@
  *
  * @requires ext-table
  *
- * Copyright (c) 2008-2021, Martin Wendt (https://wwWendt.de)
+ * Copyright (c) 2008-2023, Martin Wendt (https://wwWendt.de)
  *
  * Released under the MIT license
  * https://github.com/mar10/fancytree/wiki/LicenseInfo
  *
- * @version 2.38.2
- * @date 2022-06-30T18:24:06Z
+ * @version 2.38.4
+ * @date 2024-12-27T23:25:02Z
  */
 
 (function (factory) {
@@ -240,10 +240,10 @@
 			$input = $td.find(":input:enabled,a");
 			this.debug("Focus input", $input);
 			if ($input.length) {
-				$input.focus();
+				$input.trigger("focus");
 				setActiveDescendant(this, $input);
 			} else {
-				$td.attr("tabindex", "-1").focus();
+				$td.attr("tabindex", "-1").trigger("focus");
 				setActiveDescendant(this, $td);
 			}
 		} else {
@@ -286,7 +286,7 @@
 	 */
 	$.ui.fancytree.registerExtension({
 		name: "ariagrid",
-		version: "2.38.2",
+		version: "2.38.4",
 		// Default options for this extension.
 		options: {
 			// Internal behavior flags
@@ -610,7 +610,7 @@
 				case "esc":
 					if ($activeTd && !tree.forceNavMode) {
 						// Switch from cell-edit-mode to cell-nav-mode
-						// $target.closest( "td" ).focus();
+						// $target.closest( "td" ).trigger("focus");
 						tree.forceNavMode = true;
 						tree.debug("Enter cell-nav-mode");
 						tree.$container.toggleClass(

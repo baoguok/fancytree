@@ -4,7 +4,7 @@
  * Drag-and-drop support (jQuery UI draggable/droppable).
  * (Extension module for jquery.fancytree.js: https://github.com/mar10/fancytree/)
  *
- * Copyright (c) 2008-2021, Martin Wendt (https://wwWendt.de)
+ * Copyright (c) 2008-2023, Martin Wendt (https://wwWendt.de)
  *
  * Released under the MIT license
  * https://github.com/mar10/fancytree/wiki/LicenseInfo
@@ -400,13 +400,15 @@
 								"Re-enable focus that was prevented by jQuery UI draggable."
 							);
 							// node.setFocus();
-							// $(node.span).closest(":tabbable").focus();
+							// $(node.span).closest(":tabbable").trigger("focus");
 							// $(event.target).trigger("focus");
 							// $(event.target).closest(":tabbable").trigger("focus");
 						}
 						setTimeout(function () {
 							// #300
-							$(event.target).closest(":tabbable").focus();
+							$(event.target)
+								.closest(":tabbable")
+								.trigger("focus");
 						}, 10);
 					}
 				});

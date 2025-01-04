@@ -4,7 +4,7 @@
  * Add fixed colums and headers to ext.table.
  * (Extension module for jquery.fancytree.js: https://github.com/mar10/fancytree/)
  *
- * Copyright (c) 2008-2021, Martin Wendt (https://wwWendt.de)
+ * Copyright (c) 2008-2023, Martin Wendt (https://wwWendt.de)
  *
  * Released under the MIT license
  * https://github.com/mar10/fancytree/wiki/LicenseInfo
@@ -665,7 +665,7 @@
 
 		//	treeSetFocus: function(ctx, flag) {
 		////			alert("treeSetFocus" + ctx.tree.$container);
-		//		ctx.tree.$container.focus();
+		//		ctx.tree.$container.trigger("focus");
 		//		$.ui.fancytree.focusTree = ctx.tree;
 		//	}
 	});

@@ -26,7 +26,7 @@
 		tmplInfoPane,
 		tmplMedia,
 		timerMap = {},
-		USER_AGENT = "Fancytree Taxonomy Browser/1.0",
+		// USER_AGENT = "Fancytree Taxonomy Browser/1.0",
 		GBIF_URL = "//api.gbif.org/v1/",
 		TAXONOMY_KEY = "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c", // GBIF backbone taxonomy
 		SEARCH_PAGE_SIZE = 5,
@@ -98,8 +98,11 @@
 			url: GBIF_URL + cmd,
 			data: $.extend({}, data),
 			cache: true,
-			headers: { "Api-User-Agent": USER_AGENT },
-			dataType: "jsonp",
+			// 2022-11-10: Datatype 'JSONP' no longer works:
+			// '[Error] Refused to execute http://api.gbif.org/v1/species/... as script because "X-Content-Type-Options: nosniff" was given and its Content-Type is not a script MIME type.
+			// We rely on CORS, but this only works if no additoinal header is set
+			// headers: { "Api-User-Agent": USER_AGENT },
+			dataType: "json",
 		});
 	}
 
@@ -180,7 +183,8 @@
 			// Display as <OL> list (for Bootstrap breadcrumbs)
 			$ol.empty().removeClass("busy");
 			$.each(nodeList, function (i, o) {
-				var name = o.vernacularName || o.canonicalName;
+				var name =
+					o.vernacularName || o.canonicalName || o.scientificName;
 				keyList.push(o.key);
 				if ("" + o.key === "" + key) {
 					$ol.append(
@@ -309,7 +313,10 @@
 				data.result = $.map(response.results, function (o) {
 					return (
 						o && {
-							title: o.vernacularName || o.canonicalName,
+							title:
+								o.vernacularName ||
+								o.canonicalName ||
+								o.scientificName,
 							key: o.key,
 							nubKey: o.nubKey,
 							folder: true,
@@ -485,7 +492,7 @@
 				$("#btnResetSearch").attr("disabled", query.length === 0);
 				$("#btnSearch").attr("disabled", query.length < 2);
 			})
-			.focus();
+			.trigger("focus");
 
 		$("#btnResetSearch").click(function (e) {
 			$("#searchResultPane").collapse("hide");
